@@ -26,6 +26,7 @@ class App extends Component {
       // allowFlipping: true,
       cardNeedUpdate: false,
       leaderBoard: {}, // { bestRecord: [{username: bestRecord}, ...], {mostPlays: [{username: played}, ... ] }  }
+      found: "",
     };
     this.logInUser = this.logInUser.bind(this);
     this.signUpUser = this.signUpUser.bind(this);
@@ -84,6 +85,7 @@ class App extends Component {
                 currentCard: {},
                 currentCardID: -1,
                 cardNeedUpdate: false,
+                found: "",
               });
             });
           // const cardsArray = this.createCardsArray();
@@ -103,15 +105,30 @@ class App extends Component {
           // });
         } else {
           // a match but not the final match
+          const names = [
+            "Will",
+            "Phill",
+            "Kyle",
+            "Sara",
+            "Keiran",
+            "Jeho",
+            "Wayne",
+            "Midori",
+          ];
+          const found = names[currentCard.cardValue];
+
           this.setState({
             ...this.state,
             matched: this.state.matched + 2,
             cardNeedUpdate: false,
+            previousCard: {},
+            previousCardID: -1,
+            currentCard: {},
+            currentCardID: -1,
+            found,
           });
         }
       } else {
-        function myFunction() {
-          var x = document.getElementById("myAudio").autoplay;
         console.log("not a match");
         previousCard.flipped = false;
         currentCard.flipped = false;
@@ -171,6 +188,7 @@ class App extends Component {
         clickCount,
         previousCard,
         previousCardID,
+        found: "",
       });
     } else {
       // on even clicks (ie second click of the turn)
@@ -263,7 +281,7 @@ class App extends Component {
   signUpUser(data) {
     // send post request to server to sign up
     const { user, leaderBoard } = data;
-    const newState = { ...this.state, user };
+    const newState = { ...this.state, user, leaderBoard };
     this.setState(newState);
   }
 
