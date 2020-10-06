@@ -110,6 +110,8 @@ class App extends Component {
           });
         }
       } else {
+        function myFunction() {
+          var x = document.getElementById("myAudio").autoplay;
         console.log("not a match");
         previousCard.flipped = false;
         currentCard.flipped = false;
